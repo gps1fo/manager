@@ -1,0 +1,19 @@
+# Liste blanche des fichiers AMONT que ce dépôt a le droit de modifier.
+# Tout fichier amont modifié absent de cette liste fait échouer la CI.
+# Ajouter une entrée est un acte conscient : il exige un ADR et un patch dans PATCHES.md.
+#
+# Les fichiers que NOUS créons (nouveaux fichiers) ne sont pas concernés : ils sont
+# additifs, sans conflit de merge, et n'entrent pas dans le budget.
+
+budget:
+  max_files: 40          # plafond dur — à faire baisser au fil des trimestres
+  max_added_lines: 2500
+
+allowed: []
+# Les changelogs Liquibase n'y figurent jamais : voir l'ADR-0002 du méta-dépôt.
+#
+# Exemple :
+# allowed:
+#   - path: src/main/java/org/traccar/database/DeviceLookupService.java
+#     patch: P-001
+#     adr: docs/adr/NNNN-titre.md   # ADR du méta-dépôt
