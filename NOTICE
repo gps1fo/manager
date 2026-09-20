@@ -1,0 +1,17 @@
+GPS 1fo
+Copyright 2026 GPS 1fo
+
+Ce produit dérive de l'application mobile de gestion du projet Traccar
+(https://github.com/traccar/traccar-manager), distribué sous licence Apache 2.0.
+
+  Copyright 2012 - 2026 Anton Tananaev (anton@traccar.org)
+
+Le texte de la licence figure dans LICENSE.txt. Les en-têtes de copyright des
+fichiers d'origine sont conservés tels quels.
+
+Modifications apportées par GPS 1fo (Apache 2.0, section 4b) : voir PATCHES.md
+pour le registre des fichiers amont modifiés, et UPSTREAM.md pour la version
+amont dont ce dépôt dérive.
+
+« Traccar » est une marque de Traccar Ltd. Ce produit n'est ni affilié à
+Traccar Ltd, ni approuvé par elle.
