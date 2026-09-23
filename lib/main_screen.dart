@@ -56,7 +56,7 @@ class _MainScreenState extends State<MainScreen> {
     await _initialized.future;
     _appLinks = AppLinks();
     _appLinksSubscription = _appLinks.uriLinkStream.listen((uri) {
-      if (uri.scheme == 'org.traccar.manager') {
+      if (uri.scheme == 'gps1fo') {
         final baseUri = Uri.parse(_getUrl());
         final appPathSegments = [uri.host, ...uri.pathSegments];
         final updatedQueryParameters = Map<String, String>.from(uri.queryParameters);
@@ -82,7 +82,7 @@ class _MainScreenState extends State<MainScreen> {
       final originalRedirect = Uri.parse(uri.queryParameters['redirect_uri']!);
       final redirectSegments = originalRedirect.pathSegments;
       final updatedRedirect = Uri(
-        scheme: 'org.traccar.manager',
+        scheme: 'gps1fo',
         host: redirectSegments.first,
         path: '/${redirectSegments.skip(1).join('/')}',
         queryParameters: originalRedirect.queryParameters.isEmpty ? null : originalRedirect.queryParameters,
@@ -102,7 +102,7 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   String _getUrl() {
-    final url = _preferences.getString(_urlKey) ?? 'https://demo.traccar.org';
+    final url = _preferences.getString(_urlKey) ?? const String.fromEnvironment('GPS1FO_SERVEUR');
     return url.endsWith('/') ? url.substring(0, url.length - 1) : url;
   }
 
@@ -300,8 +300,8 @@ class _MainScreenState extends State<MainScreen> {
                       if (window.flutter_inappwebview && window.flutter_inappwebview.callHandler) {
                         window.flutter_inappwebview.callHandler('appInterface', message);
                       } else {
-                        window.__traccarMessageQueue = window.__traccarMessageQueue || [];
-                        window.__traccarMessageQueue.push(message);
+                        window.__gps1foMessageQueue = window.__gps1foMessageQueue || [];
+                        window.__gps1foMessageQueue.push(message);
                       }
                     }
                   };
@@ -318,11 +318,11 @@ class _MainScreenState extends State<MainScreen> {
                     return originalCreateObjectURL.apply(this, arguments);
                   };
                   window.addEventListener('flutterInAppWebViewPlatformReady', function() {
-                    if (window.__traccarMessageQueue && window.flutter_inappwebview && window.flutter_inappwebview.callHandler) {
-                      window.__traccarMessageQueue.forEach(function(message) {
+                    if (window.__gps1foMessageQueue && window.flutter_inappwebview && window.flutter_inappwebview.callHandler) {
+                      window.__gps1foMessageQueue.forEach(function(message) {
                         window.flutter_inappwebview.callHandler('appInterface', message);
                       });
-                      window.__traccarMessageQueue = [];
+                      window.__gps1foMessageQueue = [];
                     }
                   });
                 ''',
