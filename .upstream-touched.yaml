@@ -16,6 +16,9 @@ allowed:
   - path: lib/main_screen.dart
     patch: P-002
     adr: docs/adr/0007-rebranding-des-applications-mobiles.md
+  - path: android/build.gradle.kts
+    patch: P-003
+    adr: docs/adr/0007-rebranding-des-applications-mobiles.md
 # Les changelogs Liquibase n'y figurent jamais : voir l'ADR-0002 du méta-dépôt.
 #
 # Exemple :
