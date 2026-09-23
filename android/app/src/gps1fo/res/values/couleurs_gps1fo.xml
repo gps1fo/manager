@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Bleu du disque de l'actif maître (brand/icone-1024.png du méta-dépôt). -->
+    <color name="gps1fo_icone_fond">#0B446E</color>
+</resources>
