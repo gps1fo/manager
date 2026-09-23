@@ -1,0 +1,25 @@
+<!-- Manifeste du flavor GPS 1fo. Fichier AJOUTÉ : le fusionneur d'AGP l'applique par-dessus
+     celui de l'amont, qui reste intact (ADR-0007). -->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <application
+        tools:replace="android:label"
+        android:label="GPS 1fo">
+
+        <!-- gps1fo:// s'AJOUTE au schéma amont : le fusionneur ajoute un <data>, il n'en
+             remplace pas. Ici, contrairement au traceur, le schéma sert de RAPPEL OAUTH et il
+             est aussi lu par le code Dart (main_screen.dart) — le déclarer sans le traiter
+             laisserait les liens entrants tomber dans la mauvaise branche. Les deux côtés sont
+             donc changés ensemble.
+             À répercuter côté fournisseur d'identité : l'URI de redirection enregistrée
+             devient gps1fo://… -->
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="gps1fo" android:pathPrefix="/"/>
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>

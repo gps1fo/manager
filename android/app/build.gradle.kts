@@ -32,6 +32,16 @@ android {
         jvmTarget = JavaVersion.VERSION_17.toString()
     }
 
+    // Marque GPS 1fo : le flavor porte l'identité, ses ressources vivent dans src/gps1fo/,
+    // fichiers ajoutés donc hors budget de divergence (ADR-0007).
+    flavorDimensions += "brand"
+    productFlavors {
+        create("gps1fo") {
+            dimension = "brand"
+            applicationId = "com.gps1fo.manager"
+        }
+    }
+
     defaultConfig {
         applicationId = "org.traccar.manager"
         // You can update the following values to match your application needs.
