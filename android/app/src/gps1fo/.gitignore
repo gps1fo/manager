@@ -1,0 +1,7 @@
+# La configuration Firebase est INJECTÉE au build (scripts/inject-firebase.sh du méta-dépôt),
+# jamais versionnée : check-forbidden-files.sh l'interdit, catégorie secrets, et CLAUDE.md §7.9
+# ne prévoit aucune dérogation pour cette catégorie.
+#
+# Ce .gitignore est un fichier AJOUTÉ, propre à notre flavor : celui de l'amont reste intact et
+# le budget de divergence n'en souffre pas.
+google-services.json
