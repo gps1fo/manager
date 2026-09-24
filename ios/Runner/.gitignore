@@ -1,0 +1,3 @@
+# Pendant iOS de src/gps1fo/.gitignore : la configuration Firebase est injectée au build.
+# Le fichier de l'amont, lui, reste versionné — nous n'y touchons pas.
+GoogleService-Info-Gps1fo.plist
