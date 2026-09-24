@@ -19,6 +19,12 @@ allowed:
   - path: android/build.gradle.kts
     patch: P-003
     adr: docs/adr/0007-rebranding-des-applications-mobiles.md
+  - path: ios/Runner/Info.plist
+    patch: P-004
+    adr: docs/adr/0007-rebranding-des-applications-mobiles.md
+  - path: ios/Runner.xcodeproj/project.pbxproj
+    patch: P-005
+    adr: docs/adr/0007-rebranding-des-applications-mobiles.md
 # Les changelogs Liquibase n'y figurent jamais : voir l'ADR-0002 du méta-dépôt.
 #
 # Exemple :
