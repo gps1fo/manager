@@ -29,6 +29,11 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   static const _urlKey = 'url';
+  // Schéma du rappel OAuth, PROPRE À CETTE APPLICATION. Un schéma partagé avec le traceur est
+  // réclamé par les deux : Android présente alors « Ouvrir avec » au lieu de router le rappel,
+  // et la connexion n'aboutit pas (constaté sur appareil réel le 24/09/2026). L'amont donnait
+  // déjà un schéma par application — org.traccar.manager ici.
+  static const _schemeRappel = 'gps1fo.manager';
 
   final _initialized = Completer<void>();
   final _authenticated = Completer<void>();
@@ -56,7 +61,7 @@ class _MainScreenState extends State<MainScreen> {
     await _initialized.future;
     _appLinks = AppLinks();
     _appLinksSubscription = _appLinks.uriLinkStream.listen((uri) {
-      if (uri.scheme == 'gps1fo') {
+      if (uri.scheme == _schemeRappel) {
         final baseUri = Uri.parse(_getUrl());
         final appPathSegments = [uri.host, ...uri.pathSegments];
         final updatedQueryParameters = Map<String, String>.from(uri.queryParameters);
@@ -82,7 +87,7 @@ class _MainScreenState extends State<MainScreen> {
       final originalRedirect = Uri.parse(uri.queryParameters['redirect_uri']!);
       final redirectSegments = originalRedirect.pathSegments;
       final updatedRedirect = Uri(
-        scheme: 'gps1fo',
+        scheme: _schemeRappel,
         host: redirectSegments.first,
         path: '/${redirectSegments.skip(1).join('/')}',
         queryParameters: originalRedirect.queryParameters.isEmpty ? null : originalRedirect.queryParameters,
@@ -160,9 +165,20 @@ class _MainScreenState extends State<MainScreen> {
       }
     }
 
+    // Une adresse vide ou non absolue se charge SANS lever d'erreur : la WebView affiche une page
+    // blanche, ErrorScreen ne s'affiche que sur _loadingError, et l'application est alors murée —
+    // aucun moyen d'atteindre sa saisie d'adresse. Constaté sur appareil réel le 24/09/2026.
+    // Le cas n'existait pas en amont, dont le défaut pointait sur son serveur de démonstration.
+    final base = Uri.tryParse(_getUrl());
+    final serveurUtilisable = base != null && base.isAbsolute &&
+      (base.scheme == 'http' || base.scheme == 'https') && base.host.isNotEmpty;
+
     setState(() {
       _initialUrl = url;
       _settingsReady = true;
+      if (!serveurUtilisable) {
+        _loadingError = "Aucune adresse de serveur n'est configurée.";
+      }
     });
 
     _maybeCompleteInitialized();

@@ -7,7 +7,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>GPS 1fo</string>
+	<string>GPS 1fo Gestion</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -28,7 +28,7 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<!-- Remplace le schéma amont : main_screen.dart ne route plus que celui-ci. -->
-				<string>gps1fo</string>
+				<string>gps1fo.manager</string>
 			</array>
 		</dict>
 	</array>

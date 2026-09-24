@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Bleu du disque de l'actif maître (brand/icone-1024.png du méta-dépôt). -->
-    <color name="gps1fo_icone_fond">#0B446E</color>
+    <!-- Vert-bleu PROPRE AU GESTIONNAIRE. Le traceur garde le bleu de l'actif maître :
+         deux applications au fond identique sont indiscernables dans le tiroir et dans
+         la boîte « Ouvrir avec » (constaté sur appareil réel le 24/09/2026). -->
+    <color name="gps1fo_icone_fond">#0E7C7B</color>
 </resources>
