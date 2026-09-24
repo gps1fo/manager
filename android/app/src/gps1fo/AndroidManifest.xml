@@ -4,21 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools">
     <application
         tools:replace="android:label"
-        android:label="GPS 1fo">
+        android:label="GPS 1fo Gestion">
 
-        <!-- gps1fo:// s'AJOUTE au schéma amont : le fusionneur ajoute un <data>, il n'en
-             remplace pas. Ici, contrairement au traceur, le schéma sert de RAPPEL OAUTH et il
-             est aussi lu par le code Dart (main_screen.dart) — le déclarer sans le traiter
-             laisserait les liens entrants tomber dans la mauvaise branche. Les deux côtés sont
-             donc changés ensemble.
-             À répercuter côté fournisseur d'identité : l'URI de redirection enregistrée
-             devient gps1fo://… -->
+        <!-- gps1fo.manager:// s'AJOUTE au schéma amont : le fusionneur ajoute un <data>, il
+             n'en remplace pas. Ici, contrairement au traceur, le schéma sert de RAPPEL OAUTH et
+             il est aussi lu par le code Dart (main_screen.dart, constante _schemeRappel) — le
+             déclarer sans le traiter laisserait les liens entrants tomber dans la mauvaise
+             branche. Les deux côtés changent donc ensemble.
+             Le schéma est PROPRE à cette application : partagé avec le traceur, il était réclamé
+             par les deux et Android présentait « Ouvrir avec » au lieu de remettre le rappel au
+             gestionnaire, dont la connexion n'aboutissait pas (24/09/2026).
+             À répercuter côté fournisseur d'identité : l'URI de redirection enregistrée devient
+             gps1fo.manager://… -->
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
                 <category android:name="android.intent.category.DEFAULT"/>
                 <category android:name="android.intent.category.BROWSABLE"/>
-                <data android:scheme="gps1fo" android:pathPrefix="/"/>
+                <data android:scheme="gps1fo.manager" android:pathPrefix="/"/>
             </intent-filter>
         </activity>
     </application>
